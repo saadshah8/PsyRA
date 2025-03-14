@@ -1,0 +1,10 @@
+langchain-core
+langchain-community
+langchain-text-splitters
+langchain-groq
+langchain-huggingface
+langchain-chroma
+python-dotenv
+fitz
+pymupdf
+starlette
