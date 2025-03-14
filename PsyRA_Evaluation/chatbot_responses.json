@@ -1,48 +1,26 @@
 {
-  "Dr. PsyRA": [
-    {
-      "response": "I'm here to help. It sounds like you're feeling quite troubled and overwhelmed. I want to assure you that it's completely normal to feel that way, and I'm here to support you.\n\nFrom what you've shared, it seems like you might be experiencing some symptoms of anxiety, depression, or perhaps a combination of both. These feelings can be really tough to navigate, especially when they feel like they're taking over your daily life.\n\nAs a clinical psychologist, I'd like to explore these feelings further with you. Would you be willing to talk a bit more about what's been going on? What are some of the things that are causing you distress, and how have you been coping with these feelings?",
-      "response_time": 1.3481698036193848,
-      "user_input": "I'm not feeling good"
-    },
-    {
-      "response": "I don't have information on that.",
-      "response_time": 0.6508183479309082,
-      "user_input": "i don't know"
-    }
-  ],
   "Baseline Model": [
     {
-      "response": "I'm here to listen and help. Can you tell me what's been going on that's making you feel unwell? Is it related to a specific event, person, or feeling that's been bothering you?",
-      "response_time": 0.6241476535797119,
+      "response": "I'm so sorry to hear that you're not feeling good. Can you tell me more about what's been going on and why you're feeling this way? Sometimes talking about it can help clarify things. What's been on your mind lately?",
+      "response_time": 0.9051361083984375,
       "user_input": "Hey I'm not feeling good"
     },
     {
-      "response": "I'm here to help you explore your feelings and concerns. It's okay that you don't know exactly what's bothering you right now. Can you tell me what's been on your mind lately? Have you noticed any changes in your thoughts, emotions, or behaviors that might be contributing to how you're feeling?",
-      "response_time": 0.6332075595855713,
-      "user_input": "i dont know"
-    },
-    {
-      "response": "I'm so sorry to hear that you're not feeling well. Can you tell me a bit more about what's been going on and what's been bothering you lately? Sometimes talking about it can help clarify things. Is there anything in particular that's been on your mind or that's been causing you distress?",
-      "response_time": 0.654639482498169,
-      "user_input": "hey i am not feeling good"
-    },
-    {
-      "response": "I'm here to help. It can be really tough to know where to start when we're feeling overwhelmed. Can you tell me, what's been the biggest challenge for you lately? Is there something specific that you're struggling with, or just a general feeling of being unwell? Sometimes it helps to identify what's been going on, even if it feels small or insignificant.",
-      "response_time": 0.6037201881408691,
-      "user_input": "i dont know"
+      "response": "I completely understand. It can be really tough to put our thoughts and feelings into words. Can you tell me what's been on your mind lately? Is there anything specific that's been causing you distress or discomfort? Sometimes just acknowledging our emotions can help us feel a little better.",
+      "response_time": 0.7513220310211182,
+      "user_input": "I don't know"
     }
   ],
   "PsyRA": [
     {
-      "response": "I'm so sorry to hear that you're not feeling well. It sounds like you may be experiencing some symptoms that could be related to anxiety, depression, or possibly even bipolar disorder. Can you tell me a little bit more about what's been going on and how you've been feeling lately? For example, have you been feeling worried or anxious about something specific, or have you been struggling with feelings of sadness or hopelessness?",
-      "response_time": 0.9548871517181396,
-      "user_input": "hey i am not feeling good"
+      "response": "I'm so sorry to hear that you're not feeling well. It sounds like you may be experiencing some emotional distress, which can be really tough to navigate. Can you tell me a little bit more about what's been going on and how you've been feeling lately? It might be helpful to explore some of the specific symptoms you're experiencing, such as feelings of anxiety, worry, or depression. Are there any particular situations or events that have triggered these feelings for you?",
+      "response_time": 1.410090446472168,
+      "user_input": "Hey I'm not feeling good"
     },
     {
-      "response": "I'm here to help you explore what's going on. It seems like you're experiencing some unusual thoughts and feelings. Can you tell me more about what's been on your mind lately? You mentioned not knowing, but maybe we can start with what's been bothering you or making you feel uncertain. Are there any specific situations, people, or things that have been causing you distress?",
-      "response_time": 0.6983339786529541,
-      "user_input": "i don't knnow"
+      "response": "It sounds like you're feeling a bit uncertain and overwhelmed. It's okay to not know what's going on or how to feel. Sometimes, our brains can play tricks on us, and it's normal to experience strange thoughts or feelings.\n\nCan you tell me more about what's been going on that's making you feel uncertain? What are some of the thoughts or feelings that are on your mind?",
+      "response_time": 1.1608314514160156,
+      "user_input": "i don't know"
     }
   ]
 }

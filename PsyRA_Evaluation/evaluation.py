@@ -1,5 +1,3 @@
-# evaluation.py
-
 import json
 import time
 import statistics
@@ -113,6 +111,17 @@ class ChatbotEvaluator:
         """Create visualizations of the evaluation results"""
         if not os.path.exists(save_path):
             os.makedirs(save_path)
+
+        # Set global font sizes for all plots
+        plt.rcParams.update({
+            'font.size': 14,
+            'axes.titlesize': 20,
+            'axes.labelsize': 16,
+            'xtick.labelsize': 14,
+            'ytick.labelsize': 14,
+            'legend.fontsize': 14,
+            'figure.titlesize': 22
+        })
             
         # Convert results to DataFrame for easier visualization
         df = pd.DataFrame.from_dict(results, orient='index')
@@ -120,39 +129,22 @@ class ChatbotEvaluator:
         # Save results to CSV
         df.to_csv(f"{save_path}/results_table.csv")
         
-        # Basic metrics comparison - with improved legend
-        # Removed conversation_depth, now only showing self_bleu
-        basic_metrics = ['self_bleu']
-        basic_df = df[basic_metrics]
-        
-        # Create bar plots for basic metrics with better legend placement
-        plt.figure(figsize=(12, 8))
-        ax = basic_df.plot(kind='bar')
-        plt.title('Comparison of Basic Metrics Between Chatbots', fontsize=14)
-        plt.ylabel('Score', fontsize=12)
-        plt.xticks(rotation=45, fontsize=12)
-        plt.yticks(fontsize=12)
-        
-        # Move legend outside of the plot area
-        plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left', fontsize=12)
-        
-        plt.tight_layout()
-        plt.savefig(f"{save_path}/basic_metrics.png", bbox_inches='tight')
+        # No longer creating the basic_metrics.png plot, as requested
         
         # Create heatmap for all metrics with larger font sizes
-        plt.figure(figsize=(16, 10))
+        plt.figure(figsize=(18, 12))
         heatmap = sns.heatmap(df, annot=True, cmap='coolwarm', linewidths=.5, 
-                     annot_kws={"size": 12}, fmt='.3f')
-        plt.title('Heatmap of All Metrics', fontsize=16)
-        plt.xticks(rotation=45, fontsize=12)
-        plt.yticks(fontsize=12)
+                     annot_kws={"size": 16}, fmt='.3f')
+        plt.title('Heatmap of All Metrics', fontsize=20)
+        plt.xticks(rotation=45, fontsize=16)
+        plt.yticks(fontsize=16)
         
         # Increase the size of colorbar ticks
         cbar = heatmap.collections[0].colorbar
-        cbar.ax.tick_params(labelsize=12)
+        cbar.ax.tick_params(labelsize=16)
         
         plt.tight_layout()
-        plt.savefig(f"{save_path}/metrics_heatmap.png")
+        plt.savefig(f"{save_path}/metrics_heatmap.png", dpi=300)
         
         # Create radar chart for TextBlob sentiment metrics only
         sentiment_metrics = ['textblob_sentiment', 'textblob_subjectivity']
@@ -167,55 +159,62 @@ class ChatbotEvaluator:
         angles += angles[:1]  # Close the loop
         
         # Initialize the plot
-        fig, ax = plt.subplots(figsize=(10, 10), subplot_kw=dict(polar=True))
+        fig, ax = plt.subplots(figsize=(12, 12), subplot_kw=dict(polar=True))
         
         # Draw one line per chatbot and fill area
         for chatbot in self.chatbot_names:
             values = sentiment_df.loc[chatbot].values.flatten().tolist()
             values += values[:1]  # Close the loop
-            ax.plot(angles, values, linewidth=1, label=chatbot)
+            ax.plot(angles, values, linewidth=2, label=chatbot)
             ax.fill(angles, values, alpha=0.1)
         
         # Set category labels and increase font size
-        plt.xticks(angles[:-1], categories, size=12)
-        plt.yticks(fontsize=12)
+        plt.xticks(angles[:-1], categories, size=16)
+        plt.yticks(fontsize=16)
+        
+        # Add value labels at each data point
+        ax.tick_params(axis='y', labelsize=14)
         
         # Add legend with improved placement
-        plt.legend(loc='upper right', bbox_to_anchor=(0.1, 0.1), fontsize=12)
-        plt.title('Sentiment Analysis Comparison', size=16)
+        plt.legend(loc='upper right', bbox_to_anchor=(0.3, 0.1), fontsize=16)
+        plt.title('Sentiment Analysis Comparison', size=20)
         plt.tight_layout()
-        plt.savefig(f"{save_path}/sentiment_radar.png")
+        plt.savefig(f"{save_path}/sentiment_radar.png", dpi=300)
         
         # Create bar chart for Empath categories including self_bleu
-        empath_cols = [col for col in df.columns if col.startswith('empath_')]
-        if empath_cols:
-            # Include self_bleu with empath categories
-            empathy_metrics = empath_cols + ['self_bleu']
-            empath_df = df[empathy_metrics]
-            
-            # Create a mapping with better labels for display
-            empath_labels = {
-                'empath_negative_emotion': 'Negative Emotion',
-                'empath_anger': 'Anger',
-                'empath_fear': 'Fear',
-                'self_bleu': 'Self-BLEU'
-            }
-            
-            # Rename for display
-            empath_df_display = empath_df.rename(columns=empath_labels)
-            
-            plt.figure(figsize=(14, 8))
-            ax = empath_df_display.plot(kind='bar')
-            plt.title('Comparison of Empath Categories and Self-BLEU Between Chatbots', fontsize=14)
-            plt.ylabel('Score', fontsize=12)
-            plt.xticks(rotation=45, fontsize=12)
-            plt.yticks(fontsize=12)
-            
-            # Move legend outside the plot area
-            plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left', fontsize=12)
-            
-            plt.tight_layout()
-            plt.savefig(f"{save_path}/empath_comparison.png", bbox_inches='tight')
+        # Ensure we properly extract and include empath metrics
+        empath_metrics = ['empath_negative_emotion', 'empath_anger', 'empath_fear', 'self_bleu']
+        
+        # Ensure all expected columns exist in the dataframe, using zeros if not
+        for col in empath_metrics:
+            if col not in df.columns:
+                df[col] = 0
+        
+        empath_df = df[empath_metrics]
+        
+        # Create a mapping with better labels for display
+        empath_labels = {
+            'empath_negative_emotion': 'Negative Emotion',
+            'empath_anger': 'Anger',
+            'empath_fear': 'Fear',
+            'self_bleu': 'Self-BLEU'
+        }
+        
+        # Rename for display
+        empath_df_display = empath_df.rename(columns=empath_labels)
+        
+        plt.figure(figsize=(16, 10))
+        ax = empath_df_display.plot(kind='bar')
+        plt.title('Comparison of Empath Categories and Self-BLEU Between Chatbots', fontsize=20)
+        plt.ylabel('Score', fontsize=16)
+        plt.xticks(rotation=45, fontsize=16)
+        plt.yticks(fontsize=16)
+        
+        # Move legend outside the plot area
+        plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left', fontsize=16)
+        
+        plt.tight_layout()
+        plt.savefig(f"{save_path}/empath_comparison.png", bbox_inches='tight', dpi=300)
         
         # Calculate and display the winner
         self.calculate_winner(df)
