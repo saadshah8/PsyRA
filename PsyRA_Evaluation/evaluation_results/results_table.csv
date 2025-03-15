@@ -1,3 +1,0 @@
-,self_bleu,textblob_sentiment,textblob_subjectivity,empath_negative_emotion,empath_anger,empath_fear
-Baseline Model,0.46213087136229314,0.047067901234567895,0.5620370370370371,0.0,0.0,2.0
-PsyRA,0.47000654475139547,0.03002136752136752,0.5262820512820513,0.0,0.0,3.0
